@@ -1,43 +1,1965 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UpShift</title>
+
+    <title>Hasnain — Curious Mind. Building Forward.</title>
+
+    <meta name="description"
+          content="Personal portfolio of Hasnain — student, aspiring cybersecurity professional, programmer, and lifelong learner.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;1,500&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        /* =========================================================
+           ROOT
+        ========================================================= */
+
+        :root {
+            --bg: #08090b;
+            --bg-soft: #0d0f12;
+            --card: #111318;
+            --card-hover: #15181e;
+
+            --text: #f1f1ed;
+            --muted: #8e939c;
+            --dim: #5d626b;
+
+            --accent: #c7ff3d;
+            --accent-soft: rgba(199,255,61,0.10);
+
+            --border: rgba(255,255,255,0.09);
+
+            --serif: "Playfair Display", serif;
+            --sans: "Inter", sans-serif;
+            --mono: "DM Mono", monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: #000;
+        }
+
+
+        /* =========================================================
+           CUSTOM CURSOR
+        ========================================================= */
+
+        .cursor {
+            width: 9px;
+            height: 9px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-ring {
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(199,255,61,.55);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width .2s, height .2s;
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6vw;
+
+            z-index: 1000;
+
+            background: rgba(8,9,11,.72);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,.04);
+        }
+
+        .logo {
+            font-family: var(--mono);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--muted);
+            transition: .25s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+
+        /* =========================================================
+           GENERAL
+        ========================================================= */
+
+        section {
+            padding: 130px 8vw;
+            position: relative;
+        }
+
+        .section-number {
+            font-family: var(--mono);
+            color: var(--accent);
+            font-size: 11px;
+            margin-bottom: 18px;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-size: clamp(40px, 6vw, 82px);
+            line-height: .95;
+            letter-spacing: -4px;
+            margin-bottom: 55px;
+        }
+
+        .section-title em {
+            font-family: var(--serif);
+            font-weight: 500;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+
+            padding-top: 150px;
+
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+
+            background-size: 70px 70px;
+
+            mask-image: radial-gradient(circle at center, black, transparent 75%);
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--accent);
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            margin-bottom: 30px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .hero h1 {
+            font-size: clamp(60px, 11vw, 150px);
+            line-height: .82;
+            letter-spacing: -8px;
+            font-weight: 700;
+        }
+
+        .hero h1 .outline {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,.35);
+        }
+
+        .hero-subtitle {
+            margin-top: 45px;
+
+            max-width: 650px;
+
+            font-size: clamp(18px, 2vw, 25px);
+            line-height: 1.5;
+            color: var(--muted);
+        }
+
+        .hero-subtitle strong {
+            color: var(--text);
+        }
+
+        .hero-bottom {
+            position: absolute;
+            bottom: 40px;
+            left: 8vw;
+            right: 8vw;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--dim);
+        }
+
+        .scroll {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .scroll-line {
+            width: 50px;
+            height: 1px;
+            background: var(--dim);
+        }
+
+
+        /* =========================================================
+           ABOUT
+        ========================================================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 100px;
+            align-items: start;
+        }
+
+        .about-large {
+            font-size: clamp(28px, 4vw, 52px);
+            line-height: 1.15;
+            letter-spacing: -2px;
+        }
+
+        .about-large span {
+            color: var(--muted);
+        }
+
+        .about-text {
+            color: var(--muted);
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        .about-text p {
+            margin-bottom: 22px;
+        }
+
+        .signature {
+            margin-top: 40px;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 30px;
+            color: var(--text);
+        }
+
+
+        /* =========================================================
+           MARQUEE
+        ========================================================= */
+
+        .marquee {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+
+            overflow: hidden;
+            white-space: nowrap;
+
+            padding: 25px 0;
+
+            font-family: var(--mono);
+            color: var(--dim);
+        }
+
+        .marquee-inner {
+            display: inline-block;
+            animation: marquee 22s linear infinite;
+        }
+
+        .marquee span {
+            margin-right: 55px;
+        }
+
+        .marquee .bright {
+            color: var(--accent);
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+
+        /* =========================================================
+           EDUCATION
+        ========================================================= */
+
+        .timeline {
+            max-width: 1000px;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 50px;
+
+            padding: 35px 0;
+
+            border-top: 1px solid var(--border);
+
+            transition: .3s;
+        }
+
+        .timeline-item:hover {
+            padding-left: 15px;
+        }
+
+        .timeline-year {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--accent);
+        }
+
+        .timeline-content h3 {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-content p {
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 650px;
+        }
+
+
+        /* =========================================================
+           SKILLS
+        ========================================================= */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .skill {
+            min-height: 210px;
+
+            border: 1px solid var(--border);
+            background: var(--card);
+
+            padding: 30px;
+
+            transition: .35s;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill:hover {
+            transform: translateY(-6px);
+            background: var(--card-hover);
+            border-color: rgba(199,255,61,.3);
+        }
+
+        .skill-number {
+            font-family: var(--mono);
+            color: var(--accent);
+            font-size: 11px;
+        }
+
+        .skill h3 {
+            margin-top: 35px;
+            font-size: 23px;
+        }
+
+        .skill p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+
+        /* =========================================================
+           INTERESTS
+        ========================================================= */
+
+        .interest-list {
+            border-top: 1px solid var(--border);
+        }
+
+        .interest {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 30px 0;
+
+            border-bottom: 1px solid var(--border);
+
+            transition: .3s;
+        }
+
+        .interest:hover {
+            padding-left: 20px;
+        }
+
+        .interest-name {
+            font-size: clamp(28px, 4vw, 55px);
+            letter-spacing: -2px;
+        }
+
+        .interest-name em {
+            font-family: var(--serif);
+        }
+
+        .interest-tag {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           PROJECTS
+        ========================================================= */
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .project {
+            min-height: 350px;
+
+            padding: 35px;
+
+            background:
+                radial-gradient(circle at 80% 20%,
+                rgba(199,255,61,.09),
+                transparent 35%),
+                var(--card);
+
+            border: 1px solid var(--border);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            transition: .35s;
+        }
+
+        .project:hover {
+            transform: translateY(-8px);
+            border-color: rgba(199,255,61,.35);
+        }
+
+        .project-top {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .project-index {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--accent);
+        }
+
+        .project-arrow {
+            font-size: 22px;
+            color: var(--muted);
+        }
+
+        .project h3 {
+            font-size: 32px;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .project p {
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 500px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .tech {
+            font-family: var(--mono);
+            font-size: 9px;
+            padding: 7px 10px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           CURRENTLY
+        ========================================================= */
+
+        .currently {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .current-box {
+            background: var(--accent);
+            color: #08090b;
+
+            padding: 45px;
+
+            min-height: 300px;
+        }
+
+        .current-box.dark {
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .current-box .label {
+            font-family: var(--mono);
+            font-size: 10px;
+            margin-bottom: 40px;
+            opacity: .7;
+        }
+
+        .current-box h3 {
+            font-size: 38px;
+            letter-spacing: -2px;
+            line-height: 1.05;
+        }
+
+        .current-box p {
+            margin-top: 20px;
+            line-height: 1.7;
+            opacity: .7;
+        }
+
+
+        /* =========================================================
+           ACHIEVEMENTS
+        ========================================================= */
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--border);
+            border-left: 1px solid var(--border);
+        }
+
+        .achievement {
+            padding: 30px;
+
+            min-height: 180px;
+
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .achievement .big {
+            font-size: 45px;
+            font-weight: 700;
+            letter-spacing: -3px;
+            color: var(--accent);
+        }
+
+        .achievement h4 {
+            margin-top: 12px;
+            font-size: 15px;
+        }
+
+        .achievement p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 7px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+           PHILOSOPHY
+        ========================================================= */
+
+        .philosophy {
+            min-height: 70vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .quote {
+            max-width: 950px;
+
+            font-size: clamp(35px, 6vw, 85px);
+
+            line-height: 1.05;
+            letter-spacing: -4px;
+        }
+
+        .quote em {
+            font-family: var(--serif);
+            font-weight: 500;
+        }
+
+        .quote-author {
+            margin-top: 35px;
+
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--accent);
+        }
+
+
+        /* =========================================================
+           CONTACT
+        ========================================================= */
+
+        .contact {
+            min-height: 80vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact h2 {
+            font-size: clamp(60px, 10vw, 140px);
+            line-height: .85;
+            letter-spacing: -8px;
+        }
+
+        .contact h2 em {
+            font-family: var(--serif);
+        }
+
+        .contact-text {
+            margin-top: 40px;
+            color: var(--muted);
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-button {
+            border: 1px solid var(--border);
+            padding: 15px 20px;
+
+            font-family: var(--mono);
+            font-size: 10px;
+
+            transition: .3s;
+        }
+
+        .contact-button:hover {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            border-top: 1px solid var(--border);
+
+            padding: 30px 8vw;
+
+            display: flex;
+            justify-content: space-between;
+
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--dim);
+        }
+
+
+        /* =========================================================
+           REVEAL ANIMATION
+        ========================================================= */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity .8s ease, transform .8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 850px) {
+
+            body {
+                cursor: auto;
+            }
+
+            .cursor,
+            .cursor-ring {
+                display: none;
+            }
+
+            nav {
+                padding: 0 5vw;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 100px 6vw;
+            }
+
+            .hero {
+                padding-top: 130px;
+            }
+
+            .hero h1 {
+                font-size: clamp(55px, 18vw, 100px);
+                letter-spacing: -5px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .currently {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .interest {
+                gap: 20px;
+            }
+
+            .interest-name {
+                font-size: 30px;
+            }
+
+            .hero-bottom {
+                left: 6vw;
+                right: 6vw;
+            }
+
+            footer {
+                padding: 25px 6vw;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .achievement-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-subtitle {
+                font-size: 17px;
+            }
+
+            .section-title {
+                letter-spacing: -2px;
+            }
+
+            .contact h2 {
+                letter-spacing: -4px;
+            }
+        }
+
+    </style>
 </head>
-<body> 
-    <header class="header">
-        <nav>
-            <h2 class="logo">UpShift</h2>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div class="main">
-        <h1 class="text">
-            Rent a Car <br> with Ease
+
+
+<body>
+
+
+<!-- =============================================================
+     CURSOR
+============================================================= -->
+
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+
+<!-- =============================================================
+     NAVIGATION
+============================================================= -->
+
+<nav>
+
+    <a href="#top" class="logo">
+        H<span>.</span>
+    </a>
+
+    <ul class="nav-links">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#education">EDUCATION</a></li>
+        <li><a href="#skills">SKILLS</a></li>
+        <li><a href="#projects">WORK</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+    </ul>
+
+</nav>
+
+
+<main id="top">
+
+
+<!-- =============================================================
+     HERO
+============================================================= -->
+
+<section class="hero">
+
+    <div class="hero-grid"></div>
+
+    <div class="hero-content reveal">
+
+        <div class="eyebrow">
+            <span class="status-dot"></span>
+            CURRENTLY LEARNING · BUILDING · EXPLORING
+        </div>
+
+        <h1>
+            I'M<br>
+            <span class="outline">HASNAIN.</span>
         </h1>
-        <p class="btext">Whether you need a ride
-            <br>for a business trip or a weekend getaway,
-            <br> <strong class="ctext">UpShift</strong> offers a seamless rental 
-            <br> experience with top-quality vehicles 
-            <br> and reliable service.
+
+        <p class="hero-subtitle">
+            A student with a mind somewhere between
+            <strong>code, cybersecurity, science and curiosity.</strong>
+            I'm not trying to have everything figured out.
+            I'm trying to keep building until I do.
         </p>
-        <p class="lm">
-            <a href="#">
-                Learn More >
-            </a>
-        </p>
-        <button class="book">
-            Book Now
-        </button>
-        <img src="ChatGPT_Image_Jul_24__2025__09_11_55_AM-removebg-preview.png" alt="" class="car">
+
     </div>
+
+
+    <div class="hero-bottom">
+
+        <div>
+            PAKISTAN · 2026
+        </div>
+
+        <div class="scroll">
+            SCROLL
+            <span class="scroll-line"></span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     MARQUEE
+============================================================= -->
+
+<div class="marquee">
+
+    <div class="marquee-inner">
+
+        <span class="bright">CYBERSECURITY</span>
+        <span>WEB DEVELOPMENT</span>
+        <span>COMPUTING</span>
+        <span>SPACE</span>
+        <span>PHYSICS</span>
+        <span>MATHEMATICS</span>
+        <span>CODE</span>
+        <span>LITERATURE</span>
+
+        <span class="bright">CYBERSECURITY</span>
+        <span>WEB DEVELOPMENT</span>
+        <span>COMPUTING</span>
+        <span>SPACE</span>
+        <span>PHYSICS</span>
+        <span>MATHEMATICS</span>
+        <span>CODE</span>
+        <span>LITERATURE</span>
+
+    </div>
+
+</div>
+
+
+<!-- =============================================================
+     ABOUT
+============================================================= -->
+
+<section id="about">
+
+    <div class="section-number">01 — ABOUT</div>
+
+    <div class="about-grid reveal">
+
+        <div class="about-large">
+
+            I'm still becoming the person
+            <span>I want to be.</span>
+
+        </div>
+
+        <div class="about-text">
+
+            <p>
+                I'm a Pakistani student who enjoys learning things that
+                make me stop and think.
+            </p>
+
+            <p>
+                My interests have moved through computing, programming,
+                cybersecurity, physics, aerospace, astrophysics and
+                mathematics. More recently, I've also been exploring
+                literature and the ideas behind great works rather than
+                simply studying them.
+            </p>
+
+            <p>
+                I like understanding how things work — whether that's
+                a computer system, a mathematical idea, a website,
+                a physical phenomenon or a piece of literature.
+            </p>
+
+            <p>
+                I'm currently building my technical foundation while
+                preparing for university and figuring out where I can
+                turn curiosity into actual work.
+            </p>
+
+            <div class="signature">
+                — Hasnain
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     EDUCATION
+============================================================= -->
+
+<section id="education">
+
+    <div class="section-number">02 — EDUCATION</div>
+
+    <h2 class="section-title reveal">
+        Learning is<br>
+        <em>the foundation.</em>
+    </h2>
+
+    <div class="timeline reveal">
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                2026 →
+            </div>
+
+            <div class="timeline-content">
+
+                <h3>Class XII</h3>
+
+                <p>
+                    Continuing higher secondary education while preparing
+                    for university admissions and exploring technical
+                    disciplines beyond the classroom.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                RECENT
+            </div>
+
+            <div class="timeline-content">
+
+                <h3>CAIE / O-Level Foundation</h3>
+
+                <p>
+                    Built a foundation across Mathematics, Physics,
+                    Chemistry, Computer Science and English, with
+                    particular interest in computing and the sciences.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                SELF-DIRECTED
+            </div>
+
+            <div class="timeline-content">
+
+                <h3>Beyond the Classroom</h3>
+
+                <p>
+                    Exploring web development, programming, cybersecurity,
+                    computer science, astrophysics, literature and other
+                    subjects independently.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     SKILLS
+============================================================= -->
+
+<section id="skills">
+
+    <div class="section-number">03 — SKILLS</div>
+
+    <h2 class="section-title reveal">
+        Things I<br>
+        <em>can build.</em>
+    </h2>
+
+
+    <div class="skills-grid reveal">
+
+
+        <div class="skill">
+
+            <div class="skill-number">01</div>
+
+            <h3>Web Development</h3>
+
+            <p>
+                HTML, CSS and JavaScript. Interested in turning ideas
+                into clean, functional and visually distinctive websites.
+            </p>
+
+        </div>
+
+
+        <div class="skill">
+
+            <div class="skill-number">02</div>
+
+            <h3>Programming</h3>
+
+            <p>
+                Building programming fundamentals and exploring
+                problem solving, algorithms and computer science.
+            </p>
+
+        </div>
+
+
+        <div class="skill">
+
+            <div class="skill-number">03</div>
+
+            <h3>Cybersecurity</h3>
+
+            <p>
+                A major long-term direction. Currently developing the
+                foundations needed to move deeper into security.
+            </p>
+
+        </div>
+
+
+        <div class="skill">
+
+            <div class="skill-number">04</div>
+
+            <h3>Scientific Thinking</h3>
+
+            <p>
+                Physics, mathematics, chemistry and a particular
+                fascination with space and the universe.
+            </p>
+
+        </div>
+
+
+        <div class="skill">
+
+            <div class="skill-number">05</div>
+
+            <h3>Problem Solving</h3>
+
+            <p>
+                I enjoy taking difficult concepts apart until they
+                become understandable.
+            </p>
+
+        </div>
+
+
+        <div class="skill">
+
+            <div class="skill-number">06</div>
+
+            <h3>Creative Thinking</h3>
+
+            <p>
+                From website concepts to content ideas, I like combining
+                technical thinking with creativity.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     INTERESTS
+============================================================= -->
+
+<section>
+
+    <div class="section-number">04 — INTERESTS</div>
+
+    <h2 class="section-title reveal">
+        The rabbit<br>
+        <em>holes.</em>
+    </h2>
+
+
+    <div class="interest-list reveal">
+
+        <div class="interest">
+            <div class="interest-name">
+                Cyber<em>security</em>
+            </div>
+
+            <div class="interest-tag">
+                FUTURE DIRECTION
+            </div>
+        </div>
+
+
+        <div class="interest">
+            <div class="interest-name">
+                Space & <em>Astrophysics</em>
+            </div>
+
+            <div class="interest-tag">
+                CURIOSITY
+            </div>
+        </div>
+
+
+        <div class="interest">
+            <div class="interest-name">
+                Programming & <em>Computing</em>
+            </div>
+
+            <div class="interest-tag">
+                BUILDING
+            </div>
+        </div>
+
+
+        <div class="interest">
+            <div class="interest-name">
+                Physics & <em>Mathematics</em>
+            </div>
+
+            <div class="interest-tag">
+                UNDERSTANDING
+            </div>
+        </div>
+
+
+        <div class="interest">
+            <div class="interest-name">
+                English <em>Literature</em>
+            </div>
+
+            <div class="interest-tag">
+                EXPLORING
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     PROJECTS
+============================================================= -->
+
+<section id="projects">
+
+    <div class="section-number">05 — WORK</div>
+
+    <h2 class="section-title reveal">
+        Things I've<br>
+        <em>built & explored.</em>
+    </h2>
+
+
+    <div class="projects reveal">
+
+
+        <article class="project">
+
+            <div class="project-top">
+
+                <span class="project-index">
+                    PROJECT 01
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <h3>Personal Web</h3>
+
+                <p>
+                    This portfolio itself — designed as a personal
+                    digital space rather than a generic developer template.
+                </p>
+
+                <div class="project-tech">
+
+                    <span class="tech">HTML</span>
+                    <span class="tech">CSS</span>
+                    <span class="tech">JAVASCRIPT</span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="project">
+
+            <div class="project-top">
+
+                <span class="project-index">
+                    PROJECT 02
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <h3>Learning Lab</h3>
+
+                <p>
+                    A collection of experiments and exercises while
+                    developing programming and computer science skills.
+                </p>
+
+                <div class="project-tech">
+
+                    <span class="tech">CODE</span>
+                    <span class="tech">PROBLEM SOLVING</span>
+                    <span class="tech">CS</span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="project">
+
+            <div class="project-top">
+
+                <span class="project-index">
+                    PROJECT 03
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <h3>The Date Crafters</h3>
+
+                <p>
+                    A business concept exploring branding, presentation,
+                    digital presence and entrepreneurship.
+                </p>
+
+                <div class="project-tech">
+
+                    <span class="tech">BUSINESS</span>
+                    <span class="tech">BRANDING</span>
+                    <span class="tech">CREATIVE</span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="project">
+
+            <div class="project-top">
+
+                <span class="project-index">
+                    PROJECT 04
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <h3>More Coming</h3>
+
+                <p>
+                    This section will evolve as I build more projects,
+                    learn more and turn experiments into real work.
+                </p>
+
+                <div class="project-tech">
+
+                    <span class="tech">IN PROGRESS</span>
+                    <span class="tech">2026 →</span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     CURRENTLY
+============================================================= -->
+
+<section>
+
+    <div class="section-number">06 — RIGHT NOW</div>
+
+    <h2 class="section-title reveal">
+        What I'm<br>
+        <em>up to.</em>
+    </h2>
+
+
+    <div class="currently reveal">
+
+
+        <div class="current-box">
+
+            <div class="label">
+                CURRENT FOCUS
+            </div>
+
+            <h3>
+                Building my technical foundation.
+            </h3>
+
+            <p>
+                Programming, web development, computer science and
+                cybersecurity are becoming increasingly important parts
+                of what I want to do.
+            </p>
+
+        </div>
+
+
+        <div class="current-box dark">
+
+            <div class="label">
+                NEXT CHAPTER
+            </div>
+
+            <h3>
+                University → Cybersecurity / Computing / Space
+            </h3>
+
+            <p>
+                I'm exploring where these interests can lead while
+                preparing for university and developing skills that
+                will actually be useful outside the classroom.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     HOBBIES
+============================================================= -->
+
+<section>
+
+    <div class="section-number">07 — OUTSIDE THE SCREEN</div>
+
+    <h2 class="section-title reveal">
+        Because I'm<br>
+        <em>not just a résumé.</em>
+    </h2>
+
+
+    <div class="interest-list reveal">
+
+
+        <div class="interest">
+
+            <div class="interest-name">
+                Football
+            </div>
+
+            <div class="interest-tag">
+                PSG · MESSI
+            </div>
+
+        </div>
+
+
+        <div class="interest">
+
+            <div class="interest-name">
+                Chess
+            </div>
+
+            <div class="interest-tag">
+                STILL LEARNING
+            </div>
+
+        </div>
+
+
+        <div class="interest">
+
+            <div class="interest-name">
+                Literature
+            </div>
+
+            <div class="interest-tag">
+                SHAKESPEARE · PLAYS · IDEAS
+            </div>
+
+        </div>
+
+
+        <div class="interest">
+
+            <div class="interest-name">
+                Design & <em>Creative Work</em>
+            </div>
+
+            <div class="interest-tag">
+                CANVA · WEB · IDEAS
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     ACHIEVEMENTS
+============================================================= -->
+
+<section>
+
+    <div class="section-number">08 — MILESTONES</div>
+
+    <h2 class="section-title reveal">
+        So far.
+    </h2>
+
+
+    <div class="achievement-grid reveal">
+
+
+        <div class="achievement">
+
+            <div class="big">XI</div>
+
+            <h4>
+                Completed Class XI
+            </h4>
+
+            <p>
+                Moving toward the final stage of higher secondary education.
+            </p>
+
+        </div>
+
+
+        <div class="achievement">
+
+            <div class="big">01</div>
+
+            <h4>
+                First O-Level Path
+            </h4>
+
+            <p>
+                Took an unconventional academic path and continued
+                building toward higher education.
+            </p>
+
+        </div>
+
+
+        <div class="achievement">
+
+            <div class="big">∞</div>
+
+            <h4>
+                Curiosity
+            </h4>
+
+            <p>
+                A tendency to go far beyond whatever happens to be
+                required for an exam.
+            </p>
+
+        </div>
+
+
+        <div class="achievement">
+
+            <div class="big">→</div>
+
+            <h4>
+                Still Building
+            </h4>
+
+            <p>
+                The portfolio is intentionally unfinished because the
+                person behind it is too.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     PHILOSOPHY
+============================================================= -->
+
+<section class="philosophy">
+
+    <div class="reveal">
+
+        <div class="quote">
+
+            "I don't want to just
+            <em>know things.</em>
+            I want to understand them."
+
+        </div>
+
+        <div class="quote-author">
+            — HASNAIN
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     CONTACT
+============================================================= -->
+
+<section id="contact" class="contact">
+
+    <div class="section-number">
+        09 — CONTACT
+    </div>
+
+    <h2 class="reveal">
+        LET'S<br>
+        <em>BUILD.</em>
+    </h2>
+
+    <p class="contact-text reveal">
+
+        If you have a project, an idea, an opportunity, or simply
+        want to talk about technology and building things,
+        I'd be happy to hear from you.
+
+    </p>
+
+
+    <div class="contact-links reveal">
+
+        <!-- CHANGE THESE LINKS -->
+
+        <a href="mailto:YOUR_EMAIL@example.com"
+           class="contact-button">
+            EMAIL ↗
+        </a>
+
+        <a href="https://github.com/"
+           target="_blank"
+           class="contact-button">
+            GITHUB ↗
+        </a>
+
+        <a href="https://www.linkedin.com/"
+           target="_blank"
+           class="contact-button">
+            LINKEDIN ↗
+        </a>
+
+        <a href="https://instagram.com/"
+           target="_blank"
+           class="contact-button">
+            INSTAGRAM ↗
+        </a>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =============================================================
+     FOOTER
+============================================================= -->
+
+<footer>
+
+    <div>
+        HASNAIN © 2026
+    </div>
+
+    <div>
+        MADE WITH CURIOSITY.
+    </div>
+
+</footer>
+
+
+<!-- =============================================================
+     JAVASCRIPT
+============================================================= -->
+
+<script>
+
+    /* =========================================================
+       CUSTOM CURSOR
+    ========================================================= */
+
+    const cursor = document.querySelector(".cursor");
+    const ring = document.querySelector(".cursor-ring");
+
+    document.addEventListener("mousemove", (e) => {
+
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+
+        ring.style.left = e.clientX + "px";
+        ring.style.top = e.clientY + "px";
+
+    });
+
+
+    /* =========================================================
+       CURSOR HOVER EFFECT
+    ========================================================= */
+
+    const hoverElements =
+        document.querySelectorAll("a, .project, .skill, .interest");
+
+    hoverElements.forEach(element => {
+
+        element.addEventListener("mouseenter", () => {
+
+            ring.style.width = "50px";
+            ring.style.height = "50px";
+
+        });
+
+        element.addEventListener("mouseleave", () => {
+
+            ring.style.width = "32px";
+            ring.style.height = "32px";
+
+        });
+
+    });
+
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.12
+        }
+
+    );
+
+
+    revealElements.forEach(element => {
+
+        observer.observe(element);
+
+    });
+
+
+    /* =========================================================
+       NAVBAR BACKGROUND
+    ========================================================= */
+
+    const nav = document.querySelector("nav");
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 50) {
+
+            nav.style.background =
+                "rgba(8,9,11,.92)";
+
+        } else {
+
+            nav.style.background =
+                "rgba(8,9,11,.72)";
+
+        }
+
+    });
+
+
+    /* =========================================================
+       RANDOM HERO GRID MOVEMENT
+    ========================================================= */
+
+    const grid = document.querySelector(".hero-grid");
+
+    window.addEventListener("mousemove", (e) => {
+
+        const x =
+            (e.clientX / window.innerWidth - .5) * 12;
+
+        const y =
+            (e.clientY / window.innerHeight - .5) * 12;
+
+        grid.style.transform =
+            `translate(${x}px, ${y}px)`;
+
+    });
+
+
+    /* =========================================================
+       CURRENT YEAR
+    ========================================================= */
+
+    const year =
+        new Date().getFullYear();
+
+    const footer =
+        document.querySelector("footer div");
+
+    footer.textContent =
+        `HASNAIN © ${year}`;
+
+</script>
+
+
 </body>
 </html>
